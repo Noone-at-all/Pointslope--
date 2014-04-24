@@ -1,3 +1,21 @@
+def GCF(arg1, arg2):
+    CF = []
+    l = 1
+    if arg1 > arg2:
+        g = arg2
+    elif arg2 >= arg1:
+        g = arg1
+    for item in range(g):
+        if arg1 % l == 0 and arg2 % l == 0:
+            CF.append(l)
+            l += 1
+        else:
+            l += 1
+    CF.sort()
+    h = CF[::-1]
+    print h
+    return h[0]
+    
 def pointslope():
     y1 = int(raw_input('y1?'))
     x1 = int(raw_input('x1?'))
@@ -8,10 +26,18 @@ def pointslope():
     elif S == 'n':
         y2 = int(raw_input('y2?'))
         x2 = int(raw_input('x2?'))
-        motiont = str(y2 - y1)
-        motionb = str(x2 - x1)
+        motionu = str(y2 - y1)
+        motionl = str(x2 - x1)
+        print motionu
+        print motionl
+        print 'I will now call GCF'
+        motiont = int(y2 - y1) / GCF(int(motionu), int(motionl))
+        motionb = int(x2 - x1) / GCF(int(motionu), int(motionl))
         motion = '%s/%s' % (motiont, motionb)
-        if x1 - x2 == 0:
+        if x1 - x2 == 0 and y1 - y2 == 0:
+            print 'Something happened, you tried to divide 0 by 0.'
+            return 'sail'
+        elif x1 - x2 == 0:
             print 'Vertical line at x=%s' % (x1)
             return 'wot'
         elif y1 - y2 == 0:
@@ -21,13 +47,13 @@ def pointslope():
         u = False
         if m < 0:
             u = True
-        print m
-        print motion
         S = 'y'
         k = m*x1
         cosa = y1 - k
+        print m
+        print motion
         print 'Point-slope form: y - %s = %sx - %s' % (y1, motion, k)
-        print 'Slope-intercept form: y = %sx - %s' % (motion, cosa)
+        print 'Slope-intercept form: y = %sx + %s' % (motion, cosa)
         if raw_input('Standard form?') == 'y':
             mi = float(motionb)
             cosa = cosa * mi
@@ -48,7 +74,7 @@ def pointslope():
         k = m*x1
         print 'Point-slope form: y - %s = %sx - %s' % (y1, slope, k)
         cosa = y1 - k
-        print 'Slope-intercept form: y = %sx - %s' % (slope, cosa)
+        print 'Slope-intercept form: y = %sx + %s' % (slope, cosa)
         if raw_input('Standard form?') == 'y':
             print 'Assume this is standard form.'
             mi = bottom
@@ -59,4 +85,3 @@ def pointslope():
                 print 'x - %sy = - %s' % (mi, cosa)
         else:
             print 'You\'re done!'
-

@@ -1,4 +1,8 @@
 def GCF(arg1, arg2):
+    if arg1 < 0:
+        arg1 = arg1 * -1
+    elif arg2 < 0:
+        arg2 = arg2 * -1
     CF = []
     l = 1
     if arg1 > arg2:
@@ -13,7 +17,6 @@ def GCF(arg1, arg2):
             l += 1
     CF.sort()
     h = CF[::-1]
-    print h
     return h[0]
     
 def pointslope():
@@ -28,9 +31,6 @@ def pointslope():
         x2 = int(raw_input('x2?'))
         motionu = str(y2 - y1)
         motionl = str(x2 - x1)
-        print motionu
-        print motionl
-        print 'I will now call GCF'
         motiont = int(y2 - y1) / GCF(int(motionu), int(motionl))
         motionb = int(x2 - x1) / GCF(int(motionu), int(motionl))
         motion = '%s/%s' % (motiont, motionb)
@@ -64,8 +64,10 @@ def pointslope():
         else:
             print 'You\'re done!'
     elif S == 'y':
-        top = int(raw_input('What is the top of your slope?'))
-        bottom = int(raw_input('What is the bottom of your slope?'))
+        upper = int(raw_input('What is the top of your slope?'))
+        lower = int(raw_input('What is the bottom of your slope?'))
+        top = upper / GCF(upper, lower)
+        bottom = lower / GCF(upper, lower)
         m = top / float(bottom)
         h = False
         if m < 0:
